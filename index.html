@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מדריך: איך להפוך את הפרומפטים הכי טובים שלכם לכלים בלחיצה אחת בכרום</title>
+  <style>
+    :root {
+      --page: #f3f0ea;
+      --paper: #fcfbf8;
+      --ink: #171717;
+      --muted: #5f5a53;
+      --line: #d9d1c7;
+      --line-strong: #b7ab9d;
+      --accent: #b14f2b;
+      --accent-soft: #f1e3da;
+      --max-width: 980px;
+      --radius: 22px;
+      --shadow: 0 10px 30px rgba(30, 24, 16, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Segoe UI", "Arial", sans-serif;
+      line-height: 1.8;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    code {
+      font-family: "Consolas", "Courier New", monospace;
+    }
+
+    .page {
+      width: min(calc(100% - 28px), var(--max-width));
+      margin: 20px auto 48px;
+    }
+
+    .sheet {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      padding: 42px 40px 34px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand-mark {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      width: 96px;
+      max-width: 18vw;
+      opacity: 0.92;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .kicker {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 700;
+      background: #fff;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.9fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 4.2vw, 4.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .subhead {
+      margin: 16px 0 0;
+      max-width: 28ch;
+      font-size: clamp(1.18rem, 1.8vw, 1.5rem);
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .source-line {
+      margin: 22px 0 0;
+      font-size: 1.06rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .lead {
+      margin: 28px 0 0;
+      max-width: 58ch;
+      font-size: 1.16rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 800;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: var(--ink);
+      color: #fff;
+      border: 1px solid var(--ink);
+    }
+
+    .button-secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line-strong);
+    }
+
+    .author-panel {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .portrait {
+      aspect-ratio: 4 / 5;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #f6f2eb;
+      overflow: hidden;
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .author-panel h2 {
+      margin: 16px 0 8px;
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+
+    .author-panel p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .author-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .author-tags span {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .content {
+      padding: 0 40px 40px;
+    }
+
+    .intro {
+      padding: 26px 0 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .intro p {
+      margin: 0;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .intro .button {
+      margin-top: 18px;
+    }
+
+    .chapter {
+      padding: 34px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .chapter:last-of-type {
+      border-bottom: 0;
+    }
+
+    .chapter-label {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .chapter h3 {
+      margin: 0 0 16px;
+      font-size: clamp(1.7rem, 2.5vw, 2.25rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .chapter p {
+      margin: 0;
+      font-size: 1.12rem;
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .box {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .box h4 {
+      margin: 0 0 10px;
+      font-size: 1.22rem;
+    }
+
+    .box p {
+      margin: 0;
+      font-size: 1.04rem;
+      color: var(--muted);
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+      align-items: center;
+    }
+
+    .flow-item {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+
+    .flow-arrow {
+      color: var(--accent);
+      font-size: 1.28rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .step {
+      padding: 20px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .step p {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .list {
+      margin-top: 18px;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .list li {
+      padding: 14px 16px;
+      border-right: 3px solid var(--accent);
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-size: 1.04rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .timeline {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .timeline-item span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.96rem;
+      font-weight: 800;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      font-size: 1.04rem;
+    }
+
+    .code-block {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+      overflow-x: auto;
+      font-size: 0.98rem;
+      line-height: 1.85;
+      direction: ltr;
+      text-align: left;
+      white-space: pre-wrap;
+    }
+
+    .callout {
+      margin: 34px 0;
+      padding: 24px;
+      border-radius: 22px;
+      background: #fff;
+      border: 1px solid var(--line-strong);
+    }
+
+    .callout h3 {
+      margin: 0 0 10px;
+      font-size: 1.7rem;
+      line-height: 1.3;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .callout .button {
+      margin-top: 18px;
+    }
+
+    .summary {
+      padding: 34px 0 6px;
+    }
+
+    .summary h3 {
+      margin: 0 0 16px;
+      font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .summary p {
+      margin: 0 0 14px;
+      font-size: 1.12rem;
+    }
+
+    .copyright {
+      margin-top: 30px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .compare,
+      .process,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        width: min(calc(100% - 16px), var(--max-width));
+        margin: 8px auto 24px;
+      }
+
+      .hero,
+      .content {
+        padding-right: 20px;
+        padding-left: 20px;
+      }
+
+      .hero {
+        padding-top: 26px;
+        padding-bottom: 26px;
+      }
+
+      .brand-mark {
+        position: static;
+        width: 82px;
+        margin-bottom: 18px;
+      }
+
+      .sheet {
+        border-radius: 22px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 2.3rem;
+      }
+
+      .chapter p,
+      .summary p,
+      .lead,
+      .source-line {
+        font-size: 1.04rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="sheet">
+      <header class="hero">
+        <a class="brand-mark" href="#guide" aria-label="ScaleUp">
+          <img src="./לוגו.jpeg" alt="ScaleUp logo">
+        </a>
+        <div class="kicker">מדריך פרקטי למי שרוצה להפוך פרומפטים טובים לכלים שחוזרים לעבוד עבורו</div>
+        <div class="hero-grid">
+          <div>
+            <h1>מדריך: איך להפוך את הפרומפטים הכי טובים שלכם לכלים בלחיצה אחת בכרום</h1>
+            <p class="subhead">איך לעבוד עם סקילז בתוך ג'מיני בכרום, לשמור פרומפטים מנצחים ולהריץ אותם שוב בלי להתחיל מאפס.</p>
+            <p class="source-line">
+              מאת מאי רייזמן, ScaleUp. מדריך קצר למי שכבר עובד עם AI ורוצה להפוך פרומפטים טובים ל-workflow קבוע, מהיר ושימושי יותר.
+            </p>
+            <p class="lead">
+              כרום השיקו את סקילז, פיצ'ר חדש בתוך ג'מיני בכרום שמאפשר לשמור פרומפטים שימושיים ולהריץ אותם שוב בלחיצה אחת. במקום לכתוב כל פעם מחדש את אותו פרומפט, אפשר לשמור אותו כ-סקיל ולהשתמש בו בכל עמוד שפותחים.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0ppggGsyTUlEsBGauiMAHEbJ03BSY3Aseb-9B-J_g85v7uUPdTpGXkxPMwEuAtPF0JqB00ywre" target="_blank" rel="noreferrer">לקביעת שיחת היכרות בחינם</a>
+              <a class="button button-secondary" href="#guide">לקריאת המדריך</a>
+            </div>
+          </div>
+
+          <aside class="author-panel">
+            <div class="portrait">
+              <img src="./אני.jpeg" alt="מאי רייזמן">
+            </div>
+            <h2>מאי רייזמן</h2>
+            <p>
+              אני חי את החיבור בין אסטרטגיה, תהליכים ובינה מלאכותית.
+            </p>
+            <p>
+              המטרה שלי היא להראות איך אפשר להשתמש ב-AI לא רק כדי לקבל תשובות, אלא כדי לבנות מערכות עבודה חכמות שחוסכות זמן ומייצרות יותר דיוק.
+            </p>
+            <p>
+              המדריך הזה נועד לקחת פיצ'ר חדש ושימושי ולהראות איך הופכים אותו לכלי עבודה אמיתי בתוך הדפדפן, בלי להסתבך ובלי להתחיל כל פעם מחדש.
+            </p>
+            <div class="author-tags">
+              <span>ScaleUp</span>
+              <span>AI לעבודה חכמה</span>
+              <span>Workflow Design</span>
+            </div>
+          </aside>
+        </div>
+      </header>
+
+      <div class="content" id="guide">
+        <section class="intro">
+          <p>
+            סקילז מאפשרים לכם לשמור פרומפטים שעובדים לכם טוב, להשתמש בהם שוב בלחיצה אחת, לערוך ולשפר אותם בכל רגע, להריץ אותם על העמוד שאתם נמצאים בו, ואפילו להפעיל אותם על כמה טאבים במקביל. אם יש לכם workflow קבוע עם AI, לא צריך לכתוב אותו שוב ושוב.
+          </p>
+          <p style="margin-top:16px;">
+            כדי למצוא את זה בפועל, נכנסים ל-Ask Gemini בסרגל הצד של כרום, מקלידים <code>/</code>, ומשם אפשר לבחור או לנהל את כל הסקילז.
+          </p>
+          <p style="margin-top:16px;">
+            הערה חשובה: כרגע זה זמין רק בדסקטופ ורק כששפת כרום מוגדרת ל-<code>English (US)</code>.
+          </p>
+          <a class="button button-secondary" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0ppggGsyTUlEsBGauiMAHEbJ03BSY3Aseb-9B-J_g85v7uUPdTpGXkxPMwEuAtPF0JqB00ywre" target="_blank" rel="noreferrer">רוצה לבנות workflows כאלה אצלך?</a>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">פתיחה</span>
+          <h3>מה זה בעצם סקילז?</h3>
+          <p>
+            סקילז הוא מנגנון בתוך ג'מיני בכרום שמאפשר לשמור פרומפטים מעולים ולהפוך אותם לכלי עבודה קבוע. במקום לזכור כל נוסח, להעתיק אותו מהערות או לנסח אותו מחדש, פשוט שומרים אותו פעם אחת ומפעילים אותו שוב כשצריך.
+          </p>
+          <ul class="list">
+            <li>לשמור פרומפטים שעובדים לכם טוב.</li>
+            <li>להשתמש בהם שוב בלחיצה אחת.</li>
+            <li>לערוך ולשפר אותם בכל רגע.</li>
+            <li>להריץ אותם על העמוד שאתם נמצאים בו.</li>
+            <li>להריץ אותם גם על כמה טאבים במקביל.</li>
+          </ul>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">שלב 1</span>
+          <h3>מתחילים מפרומפט שאתם כבר משתמשים בו שוב</h3>
+          <p>
+            השלב הראשון פשוט מאוד: מזהים פרומפט שכבר הוכיח את עצמו. כזה שחוזר אצלכם שוב ושוב ונותן תוצאה טובה. ברגע שיש לכם ניסוח שעובד, זה בדיוק המועמד להפוך ל-סקיל.
+          </p>
+          <div class="compare">
+            <div class="box">
+              <h4>דוגמאות לפרומפטים טובים</h4>
+              <p>השוואת מוצרים, סיכום מסמך, ניתוח עמוד, בדיקת רכיבים של מוצר, או חיפוש מתנה לפי תקציב.</p>
+            </div>
+            <div class="box">
+              <h4>מה לחפש</h4>
+              <p>פרומפט שאתם לא רוצים לכתוב מחדש, כזה שיש לו מבנה טוב, הקשר ברור ותוצאה שחוזרת על עצמה בצורה שימושית.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">שלב 2</span>
+          <h3>שומרים את הפרומפט מתוך ה-chat history</h3>
+          <p>
+            אחרי שכתבתם פרומפט שעבד טוב ושאתם יודעים שתרצו להשתמש בו שוב, אפשר לשמור אותו ישירות מתוך היסטוריית השיחה. כלומר, הפרומפט נשמר כ-סקיל קבוע, מוכן להפעלה בכל פעם שתצטרכו אותו.
+          </p>
+          <div class="flow" aria-label="תהליך שמירת סקיל">
+            <div class="flow-item">פרומפט שעבד טוב</div>
+            <div class="flow-arrow">←</div>
+            <div class="flow-item">Chat History</div>
+            <div class="flow-arrow">←</div>
+            <div class="flow-item">שמירה כסקיל</div>
+            <div class="flow-arrow">←</div>
+            <div class="flow-item">שימוש חוזר</div>
+          </div>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">שלב 3</span>
+          <h3>איך מפעילים סקיל בפעם הבאה?</h3>
+          <p>
+            בפעם הבאה שאתם רוצים להשתמש בפרומפט ששמרתם, לא צריך לחפש אותו או להקליד מחדש. לוחצים <code>/</code> או לוחצים על כפתור <code>+</code>, ואז בוחרים את הסקיל ששמרתם.
+          </p>
+          <p style="margin-top:16px;">
+            בפועל, נכנסים ל-Ask Gemini בסרגל הצד של כרום, מקלידים <code>/</code>, ומשם נפתחת הגישה לבחירה, הפעלה וניהול של כל הסקילז שלכם.
+          </p>
+          <div class="process">
+            <div class="step">
+              <strong>הפעלה מהירה</strong>
+              <p>לוחצים <code>/</code> או על <code>+</code> כדי לפתוח את בחירת הסקילז.</p>
+            </div>
+            <div class="step">
+              <strong>בחירה והרצה</strong>
+              <p>בוחרים את הסקיל ששמרתם והוא רץ מיד על ההקשר שבחרתם.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="callout">
+          <h3>הערך האמיתי כאן הוא לא רק שמירת פרומפט, אלא יצירת קיצור דרך לדרך החשיבה שכבר עובדת לכם.</h3>
+          <p>
+            במקום לנסח מחדש כל פעם, אתם הופכים פרומפט טוב לתהליך עבודה קבוע. זה חוסך זמן, שומר על עקביות, ומאפשר לעבוד עם AI הרבה יותר מהר.
+          </p>
+          <a class="button button-primary" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0ppggGsyTUlEsBGauiMAHEbJ03BSY3Aseb-9B-J_g85v7uUPdTpGXkxPMwEuAtPF0JqB00ywre" target="_blank" rel="noreferrer">לקביעת שיחת היכרות בחינם</a>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">שלב 4</span>
+          <h3>הסקיל יכול לרוץ על העמוד הנוכחי או על כמה טאבים במקביל</h3>
+          <p>
+            אחד היתרונות הכי שימושיים הוא שהסקיל לא חייב לעבוד רק על מה שמולכם כרגע. אפשר להריץ אותו על העמוד שבו אתם נמצאים, או לבחור טאבים נוספים ולבצע את אותה פעולה על כמה מקורות במקביל.
+          </p>
+          <div class="code-block"><code>הרצת סקיל על:
+- העמוד הנוכחי
+- טאבים נבחרים
+- כמה עמודי מוצר במקביל
+- מסמכים ארוכים שפתוחים במקביל</code></div>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">דוגמאות</span>
+          <h3>איפה זה הופך לשימושי במיוחד?</h3>
+          <p>
+            ברגע שמבינים שהסקיל עובד על תוכן פתוח בדפדפן, נפתחים המון שימושים פרקטיים לעבודה, למחקר ולחיים האישיים.
+          </p>
+          <div class="grid-3">
+            <div class="box">
+              <h4>Health &amp; Wellness</h4>
+              <p>חישוב מהיר של ערכים תזונתיים או כמות חלבון במתכון שמצאתם אונליין.</p>
+            </div>
+            <div class="box">
+              <h4>Shopping</h4>
+              <p>השוואת מפרטים בין כמה מוצרים פתוחים בכמה טאבים במקביל.</p>
+            </div>
+            <div class="box">
+              <h4>Productivity</h4>
+              <p>סריקה מהירה של מסמכים ארוכים וחילוץ המידע החשוב באמת.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">ספרייה מוכנה</span>
+          <h3>יש גם ספריית סקילז לשימוש מיידי</h3>
+          <p>
+            בנוסף לסקילז שאתם יוצרים לבד, יש גם ספרייה מוכנה של סקילז לשימוש מיידי. זו דרך מצוינת להתחיל מהר, גם אם עדיין לא בניתם לעצמכם סט פרומפטים קבוע.
+          </p>
+          <ul class="list">
+            <li>לבחור סקיל קיים.</li>
+            <li>לשמור אותו.</li>
+            <li>לערוך אותו.</li>
+            <li>להתאים אותו לצרכים שלכם.</li>
+          </ul>
+        </section>
+
+        <section class="chapter">
+          <span class="chapter-label">שליטה ואבטחה</span>
+          <h3>השליטה נשארת אצל המשתמש</h3>
+          <p>
+            המערכת מבקשת אישור לפני פעולות רגישות כמו יצירת אירוע ביומן או שליחת מייל. כלומר, גם כשעובדים מהר יותר, לא מוותרים על שליטה. הסקילז עוזרים לבצע פעולות, אבל האישור נשאר אצלכם.
+          </p>
+          <p style="margin-top:16px;">
+            שווה לזכור גם שהפיצ'ר כרגע מוגבל: הוא זמין בדסקטופ בלבד, ורק כששפת כרום מוגדרת ל-<code>English (US)</code>.
+          </p>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span>1</span>
+              <p>בוחרים סקיל רלוונטי.</p>
+            </div>
+            <div class="timeline-item">
+              <span>2</span>
+              <p>מריצים אותו על העמוד או על כמה טאבים.</p>
+            </div>
+            <div class="timeline-item">
+              <span>3</span>
+              <p>אם יש פעולה רגישה, המערכת מבקשת אישור.</p>
+            </div>
+            <div class="timeline-item">
+              <span>4</span>
+              <p>אתם שומרים שליטה מלאה על הביצוע.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="summary">
+          <h3>אם כבר מצאתם פרומפטים שעובדים, הגיע הזמן להפוך אותם לכלים.</h3>
+          <p>
+            סקילז בג'מיני בכרום נותנים דרך פשוטה לקחת פרומפט טוב, לשמור אותו, להפעיל אותו מחדש ולבנות סביבו workflow עקבי. זה לא רק יותר מהיר, זה גם הופך את העבודה עם AI להרבה יותר מדויקת ושיטתית.
+          </p>
+          <p>
+            במקום להתחיל כל פעם מדף ריק, אתם בונים לעצמכם ספריית מהלכים שעובדת בשבילכם. וכשצריך, אפשר תמיד לערוך, לשפר ולהתאים כל סקיל מחדש.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0ppggGsyTUlEsBGauiMAHEbJ03BSY3Aseb-9B-J_g85v7uUPdTpGXkxPMwEuAtPF0JqB00ywre" target="_blank" rel="noreferrer">לקביעת שיחת היכרות בחינם</a>
+            <a class="button button-secondary" href="#guide">לחזרה לתחילת המדריך</a>
+          </div>
+          <div class="copyright">
+            ScaleUp Business Consulting · מדריך בעברית לעבודה חכמה יותר עם סקילז בתוך ג'מיני בכרום
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
